@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мир парусного спорта</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #1a5f7a;
+            --secondary-color: #57c5b6;
+            --accent-color: #159895;
+            --light-color: #f8f9fa;
+            --dark-color: #002b36;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            background-color: #f0f8ff;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header styles */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero section */
+        .hero {
+            background: linear-gradient(rgba(0, 43, 54, 0.8), rgba(0, 43, 54, 0.7)), url('https://thecity.m24.ru/b/d/SYketSivfo4-IencNKPcCQlUGRluPXv4kZxNbycGshjv55OD3HWFWh2pL8EsPwl5DpSHzm95vRzNbdeHauL5EWcJ5w9e=cfPOcndMaS3oF_axmCC-fw.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 0;
+        }
+
+        section:nth-child(even) {
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* About section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.03);
+        }
+
+        /* Types section */
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .type-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .type-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .type-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .type-card-content {
+            padding: 1.5rem;
+        }
+
+        .type-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* History section */
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: var(--secondary-color);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin-bottom: 2rem;
+            position: relative;
+            width: 45%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 55%;
+        }
+
+        .timeline-content {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .timeline-content:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            top: 20px;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content:after {
+            right: -55px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content:after {
+            left: -55px;
+        }
+
+        .timeline-year {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Gallery section */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 200px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 43, 54, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay i {
+            color: white;
+            font-size: 2rem;
+        }
+
+        /* Weather widget */
+        .weather-widget {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .weather-info {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+
+        .temperature {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .weather-details p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Modal for gallery */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .modal img {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+
+            .timeline:before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                width: calc(100% - 60px);
+                left: 60px !important;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content:after,
+            .timeline-item:nth-child(even) .timeline-content:after {
+                left: -55px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: var(--primary-color);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 0.5rem 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .types-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-ship"></i>
+                    <span>Парусный спорт</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#about">О парусном спорте</a></li>
+                    <li><a href="#types">Виды</a></li>
+                    <li><a href="#history">История</a></li>
+                    <li><a href="#gallery">Галерея</a></li>
+                    <li><a href="#weather">Погода для плавания</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Мир парусного спорта</h1>
+            <p>Почувствуйте силу ветра, свободу открытого моря и адреналин соревнований. Парусный спорт — это не просто увлечение, это образ жизни, объединяющий людей с морем.</p>
+            <a href="#about" class="btn">Узнать больше</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">О парусном спорте</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Парусный спорт — один из старейших видов спорта, который включает в себя гонки на парусных судах или соревнования по управлению такими судами. Это не только спорт, но и искусство, требующее знания ветра, течений и техники управления парусом.</p>
+                    <p>Парусный спорт развивает выносливость, стратегическое мышление и умение работать в команде. Сегодня он включает в себя множество дисциплин: от регат на яхтах до виндсерфинга и кайтсерфинга.</p>
+                    <p>Современные технологии позволили создать высокотехнологичные суда, способные развивать огромные скорости, что делает соревнования еще более зрелищными и захватывающими.</p>
+                    <a href="#types" class="btn" style="margin-top: 1rem;">Виды парусного спорта</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://power-boat.ru/wp-content/uploads/2018/07/Osobennosti-yahtinga.jpg" alt="Парусная яхта">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Types Section -->
+    <section id="types" class="types">
+        <div class="container">
+            <h2 class="section-title">Виды парусного спорта</h2>
+            <div class="types-grid">
+                <div class="type-card">
+                    <img src="https://opis-cdn.tinkoffjournal.ru/mercury/yachting-russia1.e1zu5biorceb..png" alt="Яхтинг">
+                    <div class="type-card-content">
+                        <h3>Яхтинг</h3>
+                        <p>Самый классический вид парусного спорта, включающий гонки на яхтах различных классов. Требует отличных навыков управления судном и работы в команде.</p>
+                    </div>
+                </div>
+                <div class="type-card">
+                    <img src="https://sup-club.ru/upload/resize_cache/webp/upload/medialibrary/c68/Windsurfing-Liam-Dunkerbeck.webp" alt="Виндсерфинг">
+                    <div class="type-card-content">
+                        <h3>Виндсерфинг</h3>
+                        <p>Серфинг с парусом, объединяющий элементы серфинга и парусного спорта. Спортсмен управляет доской с парусом, используя силу ветра.</p>
+                    </div>
+                </div>
+                <div class="type-card">
+                    <img src="https://static1-repo.aif.ru/1/e9/3021727/c/d42d1729f51e9e2991fa552e9b2b243e.webp" alt="Кайтсерфинг">
+                    <div class="type-card-content">
+                        <h3>Кайтсерфинг</h3>
+                        <p>Молодой и экстремальный вид спорта, в котором спортсмен использует воздушного змея (кайт) для движения по воде на специальной доске.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section id="history" class="history">
+        <div class="container">
+            <h2 class="section-title">История парусного спорта</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1662 г.</div>
+                        <p>Первые официальные парусные гонки проведены в Англии между королем Карлом II и его братом герцогом Йоркским.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1851 г.</div>
+                        <p>Проведена первая регата Кубка Америки - старейшее международное соревнование в мире спорта.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1900 г.</div>
+                        <p>Парусный спорт впервые включен в программу Олимпийских игр в Париже.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1967 г.</div>
+                        <p>Изобретен виндсерфинг - гибрид серфинга и парусного спорта.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1990-е гг.</div>
+                        <p>Появление и развитие кайтсерфинга как нового направления парусного спорта.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2 class="section-title">Галерея</h2>
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <img src="https://sport.insure/upload/iblock/2a3/2a31e41fef0c16f9459dbb0504ae984c.jpg" alt="Парусная регата">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://windsurfingist.ru/wp-content/uploads/2015/10/vid-sporta-vindserfing.jpg" alt="Виндсерфинг">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://kiteam.ru/wp-content/uploads/2020/04/scale_1200.jpg" alt="Кайтсерфинг">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://opis-cdn.tinkoffjournal.ru/mercury/yachting-russia1.e1zu5biorceb..png" alt="Яхта в море">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 1rem;">Нажмите на изображение для увеличения</p>
+        </div>
+    </section>
+
+    <!-- Weather Section -->
+    <section id="weather" class="weather">
+        <div class="container">
+            <h2 class="section-title">Погода для плавания</h2>
+            <div class="weather-widget">
+                <h3>Условия для парусного спорта сегодня</h3>
+                <div class="weather-info">
+                    <div class="temperature">22°C</div>
+                    <div class="weather-details">
+                        <p><i class="fas fa-wind"></i> Скорость ветра: <strong>12 узлов</strong></p>
+                        <p><i class="fas fa-water"></i> Волнение моря: <strong>Умеренное</strong></p>
+                        <p><i class="fas fa-sun"></i> Видимость: <strong>Хорошая</strong></p>
+                    </div>
+                </div>
+                <p style="margin-top: 1.5rem; color: var(--primary-color); font-weight: 600;">
+                    <i class="fas fa-check-circle"></i> Отличные условия для парусного спорта!
+                </p>
+                <button id="update-weather" class="btn" style="margin-top: 1.5rem;">Обновить погоду</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Парусный спорт</h3>
+                    <p>Искусство управления парусом, объединяющее человека с морем и ветром. Спорт, туризм и образ жизни.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Быстрые ссылки</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#about">О парусном спорте</a></li>
+                        <li><a href="#types">Виды</a></li>
+                        <li><a href="#history">История</a></li>
+                        <li><a href="#gallery">Галерея</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> г. Геническ</li>
+                        <li><i class="fas fa-phone"></i> +7 (999) 123-45-67</li>
+                        <li><i class="fas fa-envelope"></i> info@sailing-sport.ru</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy;Мир парусного спорта.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for gallery images -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <img id="modalImage" src="" alt="">
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Gallery modal functionality
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeModal = document.querySelector('.close-modal');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const imgSrc = item.querySelector('img').src;
+                modalImage.src = imgSrc;
+                modal.style.display = 'flex';
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Weather update functionality
+        const updateWeatherBtn = document.getElementById('update-weather');
+        const temperatureElement = document.querySelector('.temperature');
+        const windElement = document.querySelector('.weather-details p:nth-child(1) strong');
+        const seaConditionElement = document.querySelector('.weather-details p:nth-child(2) strong');
+        const visibilityElement = document.querySelector('.weather-details p:nth-child(3) strong');
+        const weatherStatusElement = document.querySelector('.weather-widget p:last-of-type');
+
+        // Possible weather conditions
+        const temperatures = [18, 19, 20, 21, 22, 23, 24, 25];
+        const windSpeeds = ['8-10 узлов', '10-12 узлов', '12-14 узлов', '14-16 узлов', '16-18 узлов'];
+        const seaConditions = ['Спокойное', 'Легкое', 'Умеренное', 'Сильное', 'Очень сильное'];
+        const visibilities = ['Отличная', 'Хорошая', 'Умеренная', 'Плохая'];
+        
+        const weatherStatuses = [
+            {text: 'Отличные условия для парусного спорта!', icon: 'fa-check-circle', color: '#159895'},
+            {text: 'Хорошие условия для плавания', icon: 'fa-thumbs-up', color: '#57c5b6'},
+            {text: 'Условия удовлетворительные', icon: 'fa-info-circle', color: '#ffb347'},
+            {text: 'Плавание не рекомендуется', icon: 'fa-exclamation-triangle', color: '#ff6b6b'}
+        ];
+
+        function updateWeather() {
+            // Randomly select weather conditions
+            const temp = temperatures[Math.floor(Math.random() * temperatures.length)];
+            const wind = windSpeeds[Math.floor(Math.random() * windSpeeds.length)];
+            const sea = seaConditions[Math.floor(Math.random() * seaConditions.length)];
+            const visibility = visibilities[Math.floor(Math.random() * visibilities.length)];
+            
+            // Determine weather status based on conditions
+            let statusIndex;
+            if (temp >= 22 && wind.includes('10-12') && sea === 'Умеренное') {
+                statusIndex = 0;
+            } else if (temp >= 20 && (wind.includes('8-10') || wind.includes('10-12')) && (sea === 'Легкое' || sea === 'Умеренное')) {
+                statusIndex = 1;
+            } else if (temp >= 18 && (wind.includes('12-14') || wind.includes('10-12')) && sea !== 'Очень сильное') {
+                statusIndex = 2;
+            } else {
+                statusIndex = 3;
+            }
+            
+            // Update DOM elements
+            temperatureElement.textContent = `${temp}°C`;
+            windElement.textContent = wind;
+            seaConditionElement.textContent = sea;
+            visibilityElement.textContent = visibility;
+            
+            const status = weatherStatuses[statusIndex];
+            weatherStatusElement.innerHTML = `<i class="fas ${status.icon}"></i> ${status.text}`;
+            weatherStatusElement.style.color = status.color;
+            
+            // Add animation
+            weatherStatusElement.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                weatherStatusElement.style.transform = 'scale(1)';
+            }, 300);
+        }
+
+        updateWeatherBtn.addEventListener('click', updateWeather);
+
+        // Initialize with random weather on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            updateWeather();
+        });
+
+        // Sticky header on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.backgroundColor = 'rgba(26, 95, 122, 0.95)';
+            } else {
+                header.style.backgroundColor = 'var(--primary-color)';
+            }
+        });
+    </script>
+</body>
+</html>
